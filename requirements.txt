@@ -1,0 +1,10 @@
+praw
+pandas
+numpy
+nltk
+scikit-learn
+tqdm
+gensim
+sentence-transformers
+optuna
+imblearn

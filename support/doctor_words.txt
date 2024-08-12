@@ -1,0 +1,8 @@
+doctor
+psychologist
+psychiatrist
+therapist
+counsellor
+counselor
+clinician
+psychotherapist

@@ -1,0 +1,37 @@
+Filename,Model,F1-Score,Accuracy,n_estimators,max_features,criterion,class_weight,C,penalty,solver,hidden_layer_sizes,activation,batch_size,learning_rate,learning_rate_init
+word_embeddings\word_embeddings_100_average.csv,Random Forest,0.942028986,0.942857143,109,sqrt,entropy,,,,,,,,,
+word_embeddings\word_embeddings_100_average.csv,Logistic Regression,0.924137931,0.921428571,,,,balanced,18.27907416,l1,saga,,,,,
+word_embeddings\word_embeddings_100_average.csv,Neural Network,0.941979522,0.939285714,,,,,,,,"(256, 128, 128, 64, 64)",relu,1024,constant,0.001568712
+word_embeddings\word_embeddings_100_sum.csv,Random Forest,0.929078014,0.928571429,167,log2,entropy,,,,,,,,,
+word_embeddings\word_embeddings_100_sum.csv,Logistic Regression,0.933333333,0.932142857,,,,balanced,0.19089476,l1,liblinear,,,,,
+word_embeddings\word_embeddings_100_sum.csv,Neural Network,0.922558923,0.917857143,,,,,,,,"(256, 128, 64, 64, 32)",tanh,1024,adaptive,0.001650685
+word_embeddings\word_embeddings_200_average.csv,Random Forest,0.945454545,0.946428571,183,log2,entropy,balanced,,,,,,,,
+word_embeddings\word_embeddings_200_average.csv,Logistic Regression,0.940766551,0.939285714,,,,balanced,4.33131605,l1,saga,,,,,
+word_embeddings\word_embeddings_200_average.csv,Neural Network,0.944055944,0.942857143,,,,,,,,"(256, 128, 64, 32, 32)",relu,128,invscaling,0.00190406
+word_embeddings\word_embeddings_200_sum.csv,Random Forest,0.924731183,0.925,122,log2,entropy,balanced,,,,,,,,
+word_embeddings\word_embeddings_200_sum.csv,Logistic Regression,0.937062937,0.935714286,,,,,0.048844817,l2,liblinear,,,,,
+word_embeddings\word_embeddings_200_sum.csv,Neural Network,0.834008097,0.853571429,,,,,,,,"(256, 128, 64, 32, 16)",tanh,1024,adaptive,0.00157922
+word_embeddings\word_embeddings_25_average.csv,Random Forest,0.929078014,0.928571429,143,sqrt,entropy,balanced,,,,,,,,
+word_embeddings\word_embeddings_25_average.csv,Logistic Regression,0.886597938,0.882142857,,,,,18.09445379,l2,saga,,,,,
+word_embeddings\word_embeddings_25_average.csv,Neural Network,0.9375,0.935714286,,,,,,,,"(256, 128, 64, 64, 32)",relu,64,adaptive,0.001719024
+word_embeddings\word_embeddings_25_sum.csv,Random Forest,0.916666667,0.914285714,180,sqrt,entropy,,,,,,,,,
+word_embeddings\word_embeddings_25_sum.csv,Logistic Regression,0.895622896,0.889285714,,,,,0.002968886,l2,liblinear,,,,,
+word_embeddings\word_embeddings_25_sum.csv,Neural Network,0.894366197,0.892857143,,,,,,,,"(256, 128, 64, 32, 32)",logistic,512,invscaling,0.001260632
+word_embeddings\word_embeddings_50_average.csv,Random Forest,0.943661972,0.942857143,175,sqrt,gini,balanced,,,,,,,,
+word_embeddings\word_embeddings_50_average.csv,Logistic Regression,0.894197952,0.889285714,,,,balanced,20.43617323,l2,liblinear,,,,,
+word_embeddings\word_embeddings_50_average.csv,Neural Network,0.941176471,0.939285714,,,,,,,,"(256, 128, 128, 64, 64)",relu,128,invscaling,0.003655152
+word_embeddings\word_embeddings_50_sum.csv,Random Forest,0.929078014,0.928571429,159,log2,entropy,balanced,,,,,,,,
+word_embeddings\word_embeddings_50_sum.csv,Logistic Regression,0.91349481,0.910714286,,,,,0.065507621,l1,liblinear,,,,,
+word_embeddings\word_embeddings_50_sum.csv,Neural Network,0.940350877,0.939285714,,,,,,,,"(256, 128, 128, 64, 64)",tanh,1024,constant,0.001917843
+transformer\transformer_all_MiniLM_L6_v2.csv,Random Forest,0.978417266,0.978571429,127,sqrt,gini,balanced,,,,,,,,
+transformer\transformer_all_MiniLM_L6_v2.csv,Logistic Regression,0.951048951,0.95,,,,balanced,72.58096202,l2,saga,,,,,
+transformer\transformer_all_MiniLM_L6_v2.csv,Neural Network,0.961403509,0.960714286,,,,,,,,"(256, 128, 64, 64, 32)",relu,128,invscaling,0.002325758
+transformer\transformer_all_mpnet_base_v2.csv,Random Forest,0.981949458,0.982142857,157,sqrt,entropy,,,,,,,,,
+transformer\transformer_all_mpnet_base_v2.csv,Logistic Regression,0.975088968,0.975,,,,,41.53044542,l2,liblinear,,,,,
+transformer\transformer_all_mpnet_base_v2.csv,Neural Network,0.975265018,0.975,,,,,,,,"(256, 128, 64, 32, 16)",relu,64,adaptive,0.001276253
+transformer\transformer_gtr_t5_base.csv,Random Forest,0.97826087,0.978571429,75,log2,entropy,balanced,,,,,,,,
+transformer\transformer_gtr_t5_base.csv,Logistic Regression,0.971631206,0.971428571,,,,balanced,55.11371336,l2,liblinear,,,,,
+transformer\transformer_gtr_t5_base.csv,Neural Network,0.975265018,0.975,,,,,,,,"(256, 128, 64, 64, 32)",logistic,64,constant,0.001887425
+transformer\transformer_sentence_t5_base.csv,Random Forest,0.989247312,0.989285714,180,sqrt,entropy,,,,,,,,,
+transformer\transformer_sentence_t5_base.csv,Logistic Regression,0.975265018,0.975,,,,balanced,19.50322441,l1,saga,,,,,
+transformer\transformer_sentence_t5_base.csv,Neural Network,0.982206406,0.982142857,,,,,,,,"(256, 128, 64, 64, 32)",relu,512,invscaling,0.001003281

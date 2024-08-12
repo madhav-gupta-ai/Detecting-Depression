@@ -1,0 +1,4 @@
+Sport streaming apps should hide the length of certain sports/events (or maybe all)
+I always manage to watch most sports events after the event has been completed and for some sports having the length of the stream can ruin the experience. The most obvious examples are for the second leg of a knock-out football game where a draw will end up in extra time and possibly penalties or an important tennis match where you will immediately understand if they go 4 or 5 sets just by accidentally seeing how long is left in a match.
+
+In my opinion this negatively impacts the way I experience such important events, I am hardly able to watch sport if I know in advance what might happen, in the current situation where most things are watched on streaming after the event is finished I don't think it would be too hard to implement such a feature, while still allowing for a fast forward option without using necessarily a scroll bar on the bottom with the length of the stream.

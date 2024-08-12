@@ -1,0 +1,6 @@
+If you were to visit every part of a country, what would be a fun or interesting thing to gather and compare data on?
+I'm an ecologist about to embark on a month-long road trip where I will be sampling basically an entire country (Sweden, in this case). I have 49 planned sampling sites, evenly spaced about 100 km apart, and I'll be sampling two sites per day, then moving on to the next two. I'll staying at about 24 different hostels, and visiting a similar number of grocery stores, petrol/charging stations, etc.
+
+The research I'm actually being paid to do (survey invasive plants) is interesting on its own, but I also feel like, because the design of the trip is so geographically systematic and exhaustive, this is a fun opportunity to gather any extra data I can get with little effort in whatever free time I have during the trip.
+
+Like, what would make a fun post to r/dataisbeautiful when I get back? A heatmap of public bathroom quality across Sweden? Geographic patterns in how people greet me or respond to a simple question?
