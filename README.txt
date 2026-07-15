@@ -1,42 +1,72 @@
 READ ME
 
-Detecting Depression: Employing Word-Embeddings and Sentence Transformers 
+Detecting Depression: Employing Word-Embeddings and Sentence Transformers
 Madhav Gupta, Mitali Balki, Sairaj Patki, Jayaraman K. Valadi
 
 Data and Code Files
-This repository contains scripts, functions and supplementary files associated with collecting, analyzing and training machine learning classifiers on Reddit posts.
+This repository contains the dataset, scripts and derived features associated with
+collecting, analyzing and training machine learning classifiers on Reddit posts.
 
-Folders:
+Repository layout:
 
-Depression: Stores .txt posts obtained from r/depression on Reddit. These files act as our Depression posts.
-Depression_Clean: Stores "cleaned" versions of the .txt posts from the Depression folder. Cleaning involves removing psychiatry-based keywords (such as Depression, therapy, psychiatrist etc.)
-Control: Stores .txt posts obtained from r/casualconversation on Reddit. These files act as our Control posts.
-Control_Clean: Stores "cleaned" versions of the .txt posts from the Control folder. Cleaning involves removing psychiatry-based keywords (such as Depression, therapy, psychiatrist etc.)
+data/
+- Depression: .txt posts obtained from r/depression on Reddit (the Depression class).
+- Depression_Clean: "cleaned" versions of the Depression posts. Cleaning involves
+  removing psychiatry-based keywords (such as Depression, therapy, psychiatrist etc.)
+- Control: .txt posts obtained from r/casualconversation on Reddit (the Control class).
+- Control_Clean: "cleaned" versions of the Control posts.
+- support: handcrafted .txt files related to the collection and cleaning of the posts.
+  - API_credentials_example.txt: template for the Reddit API credentials. Copy it to
+    API_credentials.txt (gitignored) and fill in your own client id, secret and user agent.
+  - condition_words.txt: keywords referring to Depression
+  - diagnosis_words.txt: keywords referring to diagnoses
+  - doctor_words.txt: keywords referring to psychiatrists
+  - mh_patterns.txt: keywords referring to mental disorders
+  - mh_subreddits.txt: list of Reddit subreddits related to mental health
+  - negative_diagnosis.txt: phrases indicating that the user is not diagnosed with Depression
+  - positive_diagnosis.txt: phrases indicating that the user is diagnosed with Depression
 
-support: Stores handcrafted .txt files related to the collection and cleaning of our Reddit posts.
-- API_credentials.txt: The Reddit API details used for the collection of this dataset
-- condition_words.txt: Keywords referring to Depression
-- diagnosis_words.txt: Keywords referring to diagnoses
-- doctor_words.txt: Keywords referring to psychiatrists
-- mh_patterns.txt: Keywords referring to mental disorders
-- mh_subreddits.txt: List of Reddit subreddits related to mental health
-- negative_diagnosis.txt: Phrases indicating that the user is not diagnosed with Depression
-- positive_diagnosis.txt: Phrases indicating that the user is diagnosed with Depression
+src/ (run every script from the repository root, e.g. python src/train.py)
+- collect.py: dataset collection using the Reddit API (PRAW). Writes data/Depression
+  and data/Control.
+- clean.py: keyword cleaning. Writes data/Depression_Clean and data/Control_Clean.
+- features_glove.py: GLoVe word-embedding features (25/50/100/200-D, sum + average).
+  Writes features/word_embeddings/.
+- features_transformers.py: sentence-transformer features for four pre-trained models
+  (all-MiniLM-L6-v2, all-mpnet-base-v2, gtr-t5-base, sentence-t5-base).
+  Writes features/transformer/.
+- features_tfidf.py: TF-IDF baseline features with SMOTE balancing and
+  mutual-information top-K% selection. Writes features/tfidf/.
+- train.py: SMOTE + Optuna hyperparameter tuning (100 trials, 5-fold stratified CV)
+  and evaluation of Random Forest, Logistic Regression and Multi-Layer Perceptron
+  on every feature CSV. Writes results/results.csv and results/final_results.csv.
 
-transformer: Stores sentence-transformer based features of our .txt posts in .csv format
-- contains four .csv files, one for each of our chosen sentence transformers
+features/
+- word_embeddings: GLoVe-based features of the cleaned posts in .csv format
+  (two files - summed + averaged - for each of 25-D, 50-D, 100-D, 200-D).
+- transformer: sentence-transformer features of the cleaned posts in .csv format
+  (one file per chosen sentence transformer).
 
-word_embeddings: Stores GLoVe based features of our .txt posts in .csv format
-- contains eight .csv files, two (summed + averaged) for each of our GLoVe variants (25-D, 50-D, 100-D, 200-D)
+results/
+- final_results.csv: classification performance (F1, Accuracy) and tuned
+  hyperparameters for every feature set x model combination.
+- misclassified/: posts misclassified by the best models, used for the qualitative
+  error analysis in the published paper.
 
-requirements.txt: List of Python dependencies to be installed for the smooth functionality and operation of our code
+experiments/
+- blackhole.py: unpublished 2024 experiment - Black Hole metaheuristic feature
+  selection wrapped around the classifiers.
 
-mastercode.py: A comprehensive Python script consisting of the various functions that our code comprises of
-- dataset_collection(): Uses the specified data collection methodology to obtain and save Reddit posts (both Depression and Control) and save them as .txt files in their respective folders
-- remove_words(): Cleans the obtained .txt posts and saves them in their respective Clean folders
-- word_embedding(suffix): Generates GLoVe word-embedding features for the chosen folder. 'suffix' helps specify the folder to be chosen ('' or '_Clean')
-- transformer(suffix): Generates sentence transformer features for the chosen folder. 'suffix' helps specify the folder to be chosen ('' or '_Clean')
-- get_results(): Implements SMOTE and tunes, trains and evaluates machine learning models (Random Forest, Logistic Regression, Multi-Layer Perceptron) for each word-embedding and sentence-transformer features .csv file, and saves their respective performances and best hyperparameters as 'results.csv'.
-- format_results(results_file, modified_file): Parses the results.csv file and saves it in a more readable .csv format (clear hyperparameter columns) as modified_file.
+notebooks/
+- demo/demo.ipynb: self-contained walkthrough of the pipeline (preprocess -> TF-IDF /
+  GLoVe -> Random Forest) on a CSV version of the dataset.
+- test.ipynb: prototype of the Optuna tuning pipeline (May 2024).
 
-Ensure that all dependencies are installed, and required data files are available in the support folder.
+Requirements: see requirements.txt (Python 3; praw, pandas, numpy, nltk, scikit-learn,
+tqdm, gensim, sentence-transformers, optuna, imblearn).
+
+Published work:
+- Gupta, Patki & Valadi (2024), "Detecting Depression: Employing Natural Language
+  Processing and Random Forests" (CSCT 2023).
+- Gupta, Balki, Patki & Valadi, "Detecting Depression: Employing Word-Embeddings and
+  Sentence Transformers", Springer Journal of Computational Social Science.

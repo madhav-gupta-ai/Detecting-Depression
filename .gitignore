@@ -1,0 +1,6 @@
+# Credentials - never commit real Reddit API keys
+data/support/API_credentials.txt
+
+# Python
+__pycache__/
+*.pyc

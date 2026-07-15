@@ -1,0 +1,4 @@
+creality 3D printers
+has anyone managed to get their Creality printer to connect to the internet ,I have two Creality printers ,ender 3 and a resin Halot the Halot comes with built wi-fi the Ender 3 does not .I bought a Creality smart wi-fi sky box ,but having trouble setting it up for the Ender 3.
+
+I am not very clued up on these thing yet but am trying to learn as much as I can ,at 76 years old I am finding difficult
