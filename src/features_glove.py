@@ -1,11 +1,14 @@
 
 # GLoVe word-embedding feature extraction
 # Reads data/Depression<suffix> and data/Control<suffix> and writes 8 feature CSVs
-# (25/50/100/200 dimensions x sum/average) to features/word_embeddings/.
-# suffix = '_Clean' uses the keyword-cleaned dataset (as in the published study);
-# suffix = '' uses the original posts.
+# (25/50/100/200 dimensions x sum/average).
+# suffix = '_Clean' uses the keyword-cleaned dataset (as in the published study)
+# and writes to features/word_embeddings/;
+# suffix = '' uses the original posts and writes to features/word_embeddings_unclean/
+# (used by the keyword-removal comparison study, src/cross_domain.py).
 #
 # Run from the repository root:  python src/features_glove.py
+# (pass --original to embed the original, uncleaned posts instead)
 
 def word_embedding(suffix):
 
@@ -21,6 +24,10 @@ def word_embedding(suffix):
     # Define the path to the folders containing the text files
     text_folder_path = 'data/Depression'+suffix
     control_folder_path = 'data/Control'+suffix
+
+    # Output folder: the cleaned dataset is the published one and goes to
+    # features/word_embeddings; the original posts go to a separate folder
+    output_folder = 'features/word_embeddings' if suffix == '_Clean' else 'features/word_embeddings_unclean'
 
     # Get the list of text files in the folder
     text_files = [f for f in os.listdir(text_folder_path) if f.endswith(".txt")]
@@ -74,7 +81,7 @@ def word_embedding(suffix):
 
         # Creating the .csv file
         n_dimensions = int(modelname[14:])
-        filename = f'features/word_embeddings/word_embeddings_{n_dimensions}_{sum_or_average}.csv'
+        filename = f'{output_folder}/word_embeddings_{n_dimensions}_{sum_or_average}.csv'
         print(filename)
 
         # Loading the GloVe model
@@ -99,8 +106,8 @@ def word_embedding(suffix):
     # on the basis of calculation by sum and calculation by average word vectors
 
     # Create the output folder if it doesn't exist
-    if not os.path.exists('features/word_embeddings'):
-        os.makedirs('features/word_embeddings')
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
     for modelname in [f'glove-twitter-{x}' for x in [25, 50, 100, 200]]:
         for sum_or_average in ['sum', 'average']:
@@ -110,4 +117,5 @@ def word_embedding(suffix):
 
 
 if __name__ == "__main__":
-    word_embedding('_Clean')
+    import sys
+    word_embedding('' if '--original' in sys.argv else '_Clean')

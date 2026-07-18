@@ -1,11 +1,14 @@
 
 # Sentence-transformer feature extraction
 # Reads data/Depression<suffix> and data/Control<suffix> and writes 4 feature CSVs
-# (all-MiniLM-L6-v2, all-mpnet-base-v2, gtr-t5-base, sentence-t5-base)
-# to features/transformer/.
-# suffix = '_Clean' uses the keyword-cleaned dataset (as in the published study).
+# (all-MiniLM-L6-v2, all-mpnet-base-v2, gtr-t5-base, sentence-t5-base).
+# suffix = '_Clean' uses the keyword-cleaned dataset (as in the published study)
+# and writes to features/transformer/;
+# suffix = '' uses the original posts and writes to features/transformer_unclean/
+# (used by the keyword-removal comparison study, src/cross_domain.py).
 #
 # Run from the repository root:  python src/features_transformers.py
+# (pass --original to embed the original, uncleaned posts instead)
 
 def transformer(suffix):
 
@@ -97,6 +100,10 @@ def transformer(suffix):
     depression_path = 'data/Depression'+suffix
     control_path = 'data/Control'+suffix
 
+    # Output folder: the cleaned dataset is the published one and goes to
+    # features/transformer; the original posts go to a separate folder
+    output_folder = 'features/transformer' if suffix == '_Clean' else 'features/transformer_unclean'
+
     # get list of text files from the depression folder and embed them
     text_files = [f for f in os.listdir(depression_path) if f.endswith(".txt")]
 
@@ -180,15 +187,16 @@ def transformer(suffix):
 
 
     # Create the output folder if it doesn't exist
-    if not os.path.exists('features/transformer'):
-        os.makedirs('features/transformer')
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
     # download dataframes as csv files
-    df_model1.to_csv('features/transformer/transformer_all_minilm_l6_v2.csv', index=False)
-    df_model2.to_csv('features/transformer/transformer_all_mpnet_base_v2.csv', index=False)
-    df_model3.to_csv('features/transformer/transformer_gtr_t5_base.csv', index=False)
-    df_model4.to_csv('features/transformer/transformer_sentence_t5_base.csv', index=False)
+    df_model1.to_csv(f'{output_folder}/transformer_all_minilm_l6_v2.csv', index=False)
+    df_model2.to_csv(f'{output_folder}/transformer_all_mpnet_base_v2.csv', index=False)
+    df_model3.to_csv(f'{output_folder}/transformer_gtr_t5_base.csv', index=False)
+    df_model4.to_csv(f'{output_folder}/transformer_sentence_t5_base.csv', index=False)
 
 
 if __name__ == "__main__":
-    transformer('_Clean')
+    import sys
+    transformer('' if '--original' in sys.argv else '_Clean')
